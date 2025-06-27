@@ -1,0 +1,39 @@
+<div class="max-w-3xl mx-auto mt-8 p-6 bg-white rounded-lg shadow">
+  <h1 class="text-2xl font-semibold text-gray-800 mb-6 text-center">Restaurante - Fila de Pedidos</h1>
+
+  <div class="flex flex-wrap gap-4 justify-center mb-6">
+    <div class="flex flex-col">
+      <label for="mesa" class="mb-1 text-gray-700">Mesa</label>
+      <input id="mesa" type="text" [(ngModel)]="mesa"
+             placeholder="Ex: 12"
+             class="border border-gray-300 rounded px-3 py-2 w-28 focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="flex flex-col flex-1 min-w-[200px]">
+      <label for="itens" class="mb-1 text-gray-700">Itens</label>
+      <input id="itens" type="text" [(ngModel)]="itens"
+             placeholder="Ex: X-Burguer, Suco"
+             class="border border-gray-300 rounded px-3 py-2 w-full focus:outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <button (click)="add()"
+            class="self-end bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded transition-colors">
+      Adicionar Pedido
+    </button>
+  </div>
+
+  <div class="border-t pt-4">
+    <h2 class="text-xl font-semibold text-gray-700 mb-4">Pedidos</h2>
+
+    <div *ngIf="lista.length === 0" class="text-center text-gray-500">
+      Nenhum pedido adicionado.
+    </div>
+
+    <app-pedido
+      *ngFor="let pedido of lista"
+      [pedido]="pedido"
+      (removerPedido)="remover($event)"
+      (statusPedido)="alterarStatus(pedido.id, $event)">
+    </app-pedido>
+  </div>
+</div>

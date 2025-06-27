@@ -1,0 +1,25 @@
+<div class="flex justify-between items-center border p-4 rounded shadow-sm">
+  <div>
+    <p class="text-sm text-gray-500">Pedido #{{ pedido.id }}</p>
+    <p class="text-lg font-medium text-gray-800">Mesa {{ pedido.mesa }}</p>
+    <p class="text-gray-600">{{ pedido.itens }}</p>
+    <p class="text-sm text-gray-500 mt-1">Status: {{ pedido.status }}</p>
+  </div>
+
+  <div class="flex flex-col gap-2">
+    <button (click)="mudarStatus('em preparo')"
+            class="border border-yellow-500 text-yellow-500 px-4 py-2 rounded hover:bg-yellow-500 hover:text-white transition">
+      Em Preparo
+    </button>
+
+    <button (click)="mudarStatus('entregue')"
+            class="border border-green-500 text-green-500 px-4 py-2 rounded hover:bg-green-500 hover:text-white transition">
+      Entregue
+    </button>
+
+    <button (click)="remover()"
+            class="border border-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-500 hover:text-white transition">
+      Remover
+    </button>
+  </div>
+</div>
