@@ -1,0 +1,138 @@
+<div class="min-h-screen bg-gray-50 p-4">
+  <div class="max-w-2xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Lista de Pedidos</h2>
+
+    <!-- Formulário de adição -->
+    <form
+      [formGroup]="form"
+      (ngSubmit)="addItem()"
+      class="bg-white p-6 rounded-xl shadow-md mb-6 space-y-4"
+    >
+      <input
+        formControlName="title"
+        placeholder="Título"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+      />
+
+      <input
+        formControlName="description"
+        placeholder="Descrição (opcional)"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+      />
+
+      <select
+        formControlName="status"
+        class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="pendente">Pendente</option>
+        <option value="em andamento">Em andamento</option>
+        <option value="feito">Feito</option>
+      </select>
+
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition"
+      >
+        Adicionar Item
+      </button>
+    </form>
+
+    <!-- Filtro -->
+    <div class="mb-4 text-sm text-gray-700">
+      <label class="mr-2 font-semibold">Filtrar por status:</label>
+      <select
+        [(ngModel)]="filter"
+        class="border border-gray-300 rounded-lg px-2 py-1 focus:ring-2 focus:ring-blue-500"
+      >
+        <option value="todos">Todos</option>
+        <option value="pendente">Pendente</option>
+        <option value="em andamento">Em andamento</option>
+        <option value="feito">Feito</option>
+      </select>
+    </div>
+
+    <!-- Lista de itens -->
+    <div *ngFor="let item of filteredItems" class="mb-4">
+      <div
+        class="bg-white p-4 rounded-xl shadow flex flex-col gap-2"
+        *ngIf="editingId !== item.id; else editTemplate"
+      >
+        <div class="flex justify-between items-center">
+          <h3 class="text-lg font-semibold text-gray-800">
+            {{ item.title }}
+            <span class="text-sm font-normal text-gray-500">({{ item.status }})</span>
+          </h3>
+          <div class="flex gap-2">
+            <button
+              class="text-blue-600 hover:underline text-sm"
+              (click)="changeStatus(item.id)"
+            >
+              Alterar status
+            </button>
+            <button
+              class="text-yellow-600 hover:underline text-sm"
+              (click)="startEdit(item)"
+            >
+              Editar
+            </button>
+            <button
+              class="text-red-600 hover:underline text-sm"
+              (click)="deleteItem(item.id)"
+            >
+              Excluir
+            </button>
+          </div>
+        </div>
+        <p class="text-gray-600">{{ item.description }}</p>
+      </div>
+
+      <!-- Formulário de edição -->
+      <ng-template #editTemplate>
+        <form
+          [formGroup]="editForm"
+          (ngSubmit)="saveEdit()"
+          class="bg-white p-4 rounded-xl shadow space-y-3"
+        >
+          <input
+            formControlName="title"
+            placeholder="Título"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+          />
+
+          <input
+            formControlName="description"
+            placeholder="Descrição"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+          />
+
+          <select
+            formControlName="status"
+            class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="pendente">Pendente</option>
+            <option value="em andamento">Em andamento</option>
+            <option value="feito">Feito</option>
+          </select>
+
+          <div class="flex gap-2">
+            <button
+              type="submit"
+              [disabled]="editForm.invalid"
+              class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition"
+            >
+              Salvar
+            </button>
+            <button
+              type="button"
+              (click)="cancelEdit()"
+              class="bg-gray-300 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-400 transition"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </ng-template>
+    </div>
+  </div>
+</div>
