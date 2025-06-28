@@ -10,6 +10,9 @@
 - TailwindCSS
 - Angular Materials
 - Angular
-- 
+
+
 ### Outras informações relevantes
-- Foi feito um ajuste para permitir a utilização do tailwind no projeto. 
+- Foi feito um ajuste para permitir a utilização do tailwind no projeto.
+- O trabalho está na branch dev
+
