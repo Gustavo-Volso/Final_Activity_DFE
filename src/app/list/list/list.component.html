@@ -2,7 +2,7 @@
   <div class="max-w-2xl mx-auto">
     <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Lista de Pedidos</h2>
 
-    <!-- Formulário de adição -->
+
     <form
       [formGroup]="form"
       (ngSubmit)="addItem()"
@@ -38,7 +38,6 @@
       </button>
     </form>
 
-    <!-- Filtro -->
     <div class="mb-4 text-sm text-gray-700">
       <label class="mr-2 font-semibold">Filtrar por status:</label>
       <select
@@ -52,7 +51,6 @@
       </select>
     </div>
 
-    <!-- Lista de itens -->
     <div *ngFor="let item of filteredItems" class="mb-4">
       <div
         class="bg-white p-4 rounded-xl shadow flex flex-col gap-2"
@@ -87,7 +85,6 @@
         <p class="text-gray-600">{{ item.description }}</p>
       </div>
 
-      <!-- Formulário de edição -->
       <ng-template #editTemplate>
         <form
           [formGroup]="editForm"
