@@ -16,3 +16,14 @@
 - Foi feito um ajuste para permitir a utilização do tailwind no projeto.
 - O trabalho está na branch dev
 
+### Para rodar o código:
+- Instale as dependências:
+```npm install```
+
+- Inicie o servidor:
+```npm start```
+
+-  Certifique-se de ter o Angular CLI instalado globalmente:
+```npm install -g @angular/cli```
+
+
